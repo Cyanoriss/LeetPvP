@@ -150,13 +150,17 @@ public class PvPCommand implements TabExecutor {
             pl1.teleport(loc1);
             pl2.teleport(loc2);
 
-            if (!plugin.getConfig().getStringList("effects").isEmpty()) {
+            if (plugin.getConfig().getBoolean("enable-effects")) {
                 for (String line : plugin.getConfig().getStringList("effects")) {
                     String[] build = line.split(";");
 
-                    PotionEffect effect = new PotionEffect(PotionEffectType.getByName(build[0]), Integer.parseInt(build[2]) * 20, Integer.parseInt(build[1]));
-                    pl1.addPotionEffect(effect);
-                    pl2.addPotionEffect(effect);
+                    try {
+                        PotionEffect effect = new PotionEffect(PotionEffectType.getByName(build[0]), Integer.parseInt(build[2]) * 20, Integer.parseInt(build[1]));
+                        pl1.addPotionEffect(effect);
+                        pl2.addPotionEffect(effect);
+                    } catch (IllegalArgumentException e) {
+                        plugin.getLogger().severe("Не удалось найти эффект " + build[0]);
+                    }
                 }
             }
 
