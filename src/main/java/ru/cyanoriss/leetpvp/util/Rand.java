@@ -70,36 +70,4 @@ public class Rand {
 
         return new Location(center.getWorld(), randX + center.getBlockX(), 0, randZ + center.getBlockZ()).toHighestLocation();
     }
-
-    public static void lookAt(Location from, Location to) {
-        double dx = to.getX() - from.getX();
-        double dy = to.getY() - from.getY();
-        double dz = to.getZ() - from.getZ();
-
-        double distance = Math.sqrt(dx * dx + dy * dy + dz * dz);
-
-        double yaw = (float) Math.toDegrees(Math.atan2(dz, dx));
-        double pitch = (float) Math.toDegrees(Math.atan(dy / distance));
-
-        from.setYaw((float) normalizeYaw(yaw));
-        from.setPitch((float) normalizePitch(pitch));
-    }
-
-    private static double normalizeYaw(double yaw) {
-        yaw %= 360;
-        if (yaw < 0) {
-            yaw += 360;
-        }
-        return yaw;
-    }
-
-    private static double normalizePitch(double pitch) {
-        pitch %= 360;
-        if (pitch > 90) {
-            pitch = 90;
-        } else if (pitch < -90) {
-            pitch = -90;
-        }
-        return pitch;
-    }
 }
