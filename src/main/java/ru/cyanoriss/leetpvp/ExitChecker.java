@@ -13,7 +13,7 @@ public class ExitChecker implements Listener {
 
     @EventHandler
     public void onQuit(PlayerQuitEvent event) {
-        if (plugin.player.equals(event.getPlayer().getName())) {
+        if (plugin.player != null && plugin.player.equals(event.getPlayer().getName())) {
             plugin.player = null;
         }
     }
