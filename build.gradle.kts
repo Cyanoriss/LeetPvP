@@ -2,6 +2,10 @@ plugins {
     id("java")
 }
 
+java {
+    toolchain.languageVersion.set(JavaLanguageVersion.of(11))
+}
+
 tasks.withType<JavaCompile> {
     options.encoding = "UTF-8"
 }
@@ -17,7 +21,7 @@ repositories {
 dependencies {
     testImplementation(platform("org.junit:junit-bom:5.10.0"))
     testImplementation("org.junit.jupiter:junit-jupiter")
-    compileOnly("io.papermc.paper:paper-api:1.18.2-R0.1-SNAPSHOT")
+    compileOnly("com.destroystokyo.paper:paper-api:1.16.5-R0.1-SNAPSHOT")
 }
 
 tasks.test {
